@@ -1,6 +1,6 @@
 import math
 import pygame
-import BouncyCube
+import JigglySquare
 
 pygame.init()
 
@@ -8,7 +8,7 @@ screen = pygame.display.set_mode((800,600))
 
 pygame.display.set_caption("Bouncy Cube")
 
-bouncy = BouncyCube.BouncyCube(100.0, 100.0, 100)
+bouncy = JigglySquare.JigglySquare(100.0, 100.0, 100)
 
 running = True
 while running:

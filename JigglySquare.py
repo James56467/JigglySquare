@@ -3,7 +3,7 @@ import pygame
 import World
 import Point
 
-class BouncyCube:
+class JigglySquare:
     def __init__(self, xPos, yPos, halfDiagonal):
         N = Point.Point(xPos, yPos - halfDiagonal)
         E = Point.Point(xPos + halfDiagonal, yPos)
