@@ -1,3 +1,3 @@
 ![](js.PNG)
-*
-Screenshot of the program running (run Screen.py)*
+/n
+Here's the program running (run Screen.py)
