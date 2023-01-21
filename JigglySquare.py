@@ -23,7 +23,7 @@ class JigglySquare:
     
     def restForce(self, pointID, oppositeID):
         for i in range(4):
-            if(i != pointID and self.distance(self.points[pointID],self.points[i]) != 0):
+            if(i != pointID and self.distance(pointID,i) != 0):
                 if(i == oppositeID):
                     self.points[pointID].xVel -= ((self.points[pointID].xPos - self.points[i].xPos)/self.distance(pointID,i)) * (self.distance(pointID,i) - (200)) / 1000
                     self.points[pointID].yVel -= ((self.points[pointID].yPos - self.points[i].yPos)/self.distance(pointID,i)) * (self.distance(pointID,i) - (200)) / 1000
