@@ -1,17 +1,13 @@
-import math
 import pygame
 import World
 import Point
 
 class JigglySquare:
     def __init__(self, xPos, yPos, halfDiagonal):
-        N = Point.Point(xPos, yPos - halfDiagonal)
-        E = Point.Point(xPos + halfDiagonal, yPos)
-        S = Point.Point(xPos, yPos + halfDiagonal)
-        W = Point.Point(xPos - halfDiagonal, yPos)
-        self.points = [N,E,S,W]
-        self.rotPos = 0
-        self.rotVel = 0
+        self.points = [Point.Point(xPos, yPos - halfDiagonal),
+                       Point.Point(xPos + halfDiagonal, yPos),
+                       Point.Point(xPos, yPos + halfDiagonal),
+                       Point.Point(xPos - halfDiagonal, yPos)]
         self.halfDiagonal = halfDiagonal
 
         self.wPress = False
@@ -19,25 +15,21 @@ class JigglySquare:
         
         self.aPress = False
         self.dPress = False
-
-        self.qPress = False
-        self.ePress = False
         
         self.world = World.World(500)
     
-    def distance(self, pointOne, pointTwo):
-        return (((abs(pointOne.xPos - pointTwo.xPos)**2)+(abs(pointOne.yPos - pointTwo.yPos)**2))**0.5)
+    def distance(self, firstID, secondID):
+        return (((abs(self.points[firstID].xPos - self.points[secondID].xPos)**2)+(abs(self.points[firstID].yPos - self.points[secondID].yPos)**2))**0.5)
     
     def restForce(self, pointID, oppositeID):
-        jumpForce = 0
         for i in range(4):
             if(i != pointID and self.distance(self.points[pointID],self.points[i]) != 0):
                 if(i == oppositeID):
-                    self.points[pointID].xVel -= ((self.points[pointID].xPos - self.points[i].xPos)/self.distance(self.points[pointID],self.points[i])) * (self.distance(self.points[pointID],self.points[i]) - (200)) / 1000
-                    self.points[pointID].yVel -= ((self.points[pointID].yPos - self.points[i].yPos)/self.distance(self.points[pointID],self.points[i])) * (self.distance(self.points[pointID],self.points[i]) - (200)) / 1000
+                    self.points[pointID].xVel -= ((self.points[pointID].xPos - self.points[i].xPos)/self.distance(pointID,i)) * (self.distance(pointID,i) - (200)) / 1000
+                    self.points[pointID].yVel -= ((self.points[pointID].yPos - self.points[i].yPos)/self.distance(pointID,i)) * (self.distance(pointID,i) - (200)) / 1000
                 else:
-                    self.points[pointID].xVel -= ((self.points[pointID].xPos - self.points[i].xPos)/self.distance(self.points[pointID],self.points[i])) * (self.distance(self.points[pointID],self.points[i]) - (141.42136)) / 1000
-                    self.points[pointID].yVel -= ((self.points[pointID].yPos - self.points[i].yPos)/self.distance(self.points[pointID],self.points[i])) * (self.distance(self.points[pointID],self.points[i]) - (141.42136)) / 1000
+                    self.points[pointID].xVel -= ((self.points[pointID].xPos - self.points[i].xPos)/self.distance(pointID,i)) * (self.distance(pointID,i) - (141.42136)) / 1000
+                    self.points[pointID].yVel -= ((self.points[pointID].yPos - self.points[i].yPos)/self.distance(pointID,i)) * (self.distance(pointID,i) - (141.42136)) / 1000
     
     def changeVel(self, xVel, yVel):
         for i in self.points:
@@ -47,7 +39,6 @@ class JigglySquare:
     def update(self, screen):
         for i in self.points:
             i.update()
-        self.rotPos += self.rotVel
         
         #gravity
         
@@ -88,13 +79,6 @@ class JigglySquare:
             avgXVel = avgXVel / 4
             if(avgXVel < 0.3):
                 self.changeVel(0.01,0)
-        else:
-            pass
-        
-        if(self.qPress):
-            self.rotVel = -0.2
-        elif(self.ePress):
-            self.rotVel = 0.2
         
         #collision
         
