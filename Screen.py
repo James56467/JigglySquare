@@ -6,9 +6,9 @@ pygame.init()
 
 screen = pygame.display.set_mode((800,600))
 
-pygame.display.set_caption("Bouncy Cube")
+pygame.display.set_caption("Jiggly Square")
 
-bouncy = JigglySquare.JigglySquare(100.0, 100.0, 100)
+jiggle = JigglySquare.JigglySquare(100.0, 100.0, 100)
 
 running = True
 while running:
@@ -17,32 +17,24 @@ while running:
             running = False
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_w:
-                bouncy.wPress = True
+                jiggle.wPress = True
             if event.key == pygame.K_a:
-                bouncy.aPress = True
+                jiggle.aPress = True
             if event.key == pygame.K_s:
-                bouncy.sPress = True
+                jiggle.sPress = True
             if event.key == pygame.K_d:
-                bouncy.dPress = True
-            if event.key == pygame.K_q:
-                bouncy.qPress = True
-            if event.key == pygame.K_e:
-                bouncy.ePress = True
+                jiggle.dPress = True
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_w:
-                bouncy.wPress = False
+                jiggle.wPress = False
             if event.key == pygame.K_a:
-                bouncy.aPress = False
+                jiggle.aPress = False
             if event.key == pygame.K_s:
-                bouncy.sPress = False
+                jiggle.sPress = False
             if event.key == pygame.K_d:
-                bouncy.dPress = False
-            if event.key == pygame.K_q:
-                bouncy.qPress = False
-            if event.key == pygame.K_e:
-                bouncy.ePress = False
+                jiggle.dPress = False
     screen.fill((10, 200, 160))
-    bouncy.update(screen)
+    jiggle.update(screen)
     pygame.display.update()
     
 
