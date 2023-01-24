@@ -24,6 +24,8 @@ while running:
                 jiggle.sPress = True
             if event.key == pygame.K_d:
                 jiggle.dPress = True
+            if event.key == pygame.K_SPACE:
+                jiggle.spacePress = True
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_w:
                 jiggle.wPress = False
@@ -33,6 +35,8 @@ while running:
                 jiggle.sPress = False
             if event.key == pygame.K_d:
                 jiggle.dPress = False
+            if event.key == pygame.K_SPACE:
+                jiggle.spacePress = False
     screen.fill((10, 200, 160))
     jiggle.update(screen)
     pygame.display.update()

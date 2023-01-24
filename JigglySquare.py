@@ -16,6 +16,8 @@ class JigglySquare:
         self.aPress = False
         self.dPress = False
         
+        self.spacePress = False
+        
         self.world = World.World(500)
     
     def distance(self, firstID, secondID):
@@ -24,12 +26,18 @@ class JigglySquare:
     def restForce(self, pointID, oppositeID):
         for i in range(4):
             if(i != pointID and self.distance(pointID,i) != 0):
-                if(i == oppositeID):
+                if(i == oppositeID and self.spacePress == False):
                     self.points[pointID].xVel -= ((self.points[pointID].xPos - self.points[i].xPos)/self.distance(pointID,i)) * (self.distance(pointID,i) - (200)) / 1000
                     self.points[pointID].yVel -= ((self.points[pointID].yPos - self.points[i].yPos)/self.distance(pointID,i)) * (self.distance(pointID,i) - (200)) / 1000
-                else:
+                elif(i != oppositeID and self.spacePress == False):
                     self.points[pointID].xVel -= ((self.points[pointID].xPos - self.points[i].xPos)/self.distance(pointID,i)) * (self.distance(pointID,i) - (141.42136)) / 1000
                     self.points[pointID].yVel -= ((self.points[pointID].yPos - self.points[i].yPos)/self.distance(pointID,i)) * (self.distance(pointID,i) - (141.42136)) / 1000
+                elif(i == oppositeID and self.spacePress):
+                    self.points[pointID].xVel -= ((self.points[pointID].xPos - self.points[i].xPos)/self.distance(pointID,i)) * (self.distance(pointID,i) - (400)) / 1000
+                    self.points[pointID].yVel -= ((self.points[pointID].yPos - self.points[i].yPos)/self.distance(pointID,i)) * (self.distance(pointID,i) - (400)) / 1000
+                elif(i != oppositeID and self.spacePress):
+                    self.points[pointID].xVel -= ((self.points[pointID].xPos - self.points[i].xPos)/self.distance(pointID,i)) * (self.distance(pointID,i) - (282.84272)) / 1000
+                    self.points[pointID].yVel -= ((self.points[pointID].yPos - self.points[i].yPos)/self.distance(pointID,i)) * (self.distance(pointID,i) - (282.84272)) / 1000
     
     def changeVel(self, xVel, yVel):
         for i in self.points:
